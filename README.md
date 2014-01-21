@@ -58,16 +58,16 @@ Execute query on Presto cluster, and fetch results.
    * catalog string (default: instance default catalog)
  * schema [string]
    * schema string (default: intance default schema)
- * info [boolean] (optional)
+ * info [boolean :optional]
    * fetch query info (execution statistics) for success callback, or not (default false)
- * cancel [function()] (optional)
+ * cancel [function() :optional]
    * client stops fetch of query results if this callback returns `true`
- * columns [function(error, data)] (optional)
+ * columns [function(error, data) :optional]
    * called once when columns and its types are found in results
    * data
      * array of field info
      * `[ { name: "username", type: "varchar" }, { name: "cnt", type: "bigint" } ]`
- * data [function(error, data, columns, stats)] (optional)
+ * data [function(error, data, columns, stats) :optional]
    * called per fetch of query results (may be called 2 or more)
    * data
      * array of array of each column
@@ -76,11 +76,11 @@ Execute query on Presto cluster, and fetch results.
      * same as data of `columns` callback
    * stats (optional)
      * runtime statistics object of query
- * success [function(error, stats, info)] (optional)
+ * success [function(error, stats, info) :optional]
    * called once when all results are fetched (default: value of `callback`)
- * error [function(error)] (optional)
+ * error [function(error) :optional]
    * callback for errors of query execution (default: value of `callback`)
- * callback [function(error, stats)] (optional)
+ * callback [function(error, stats) :optional]
    * callback for query completion (both of success and fail)
    * one of this option or `success` must be specified
 
@@ -90,7 +90,7 @@ Callbacks order (success query) is: columns -> data (-> data xN) -> success (or 
 
 Get node list of presto cluster and return it.
 
-* opts [object] (optional)
+* opts [object :optional]
   * specify null, undefined or `{}` (currently)
 * callback [function(error,data)]
   * error
