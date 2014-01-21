@@ -11,7 +11,7 @@ client.execute({
   catalog: 'hive',
   schema:  'default',
   columns: function(error, data){ console.log({resultColumns: data}); },
-  data:    function(error, data, columns, stats){ cosole.log(data); },
+  data:    function(error, data, columns, stats){ console.log(data); },
   success: function(error, stats){},
   error:   function(error){}
 });
