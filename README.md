@@ -3,8 +3,8 @@
 Distributed query engine "Presto" 's client library for node.js.
 
 ```js
-var Client = require('presto-client').Client;
-var client = new Client();
+var presto = require('presto-client');
+var client = new presto.Client();
 
 client.execute({
   query:   'SELECT count(*) as cnt FROM tblname WHERE ...',
@@ -23,7 +23,7 @@ client.execute({
 npm install -g presto-client
 ```
 
-Or write package name in your own `packagen.json`, and do `npm install`.
+Or add `presto-client` to your own `packagen.json`, and do `npm install`.
 
 ## API
 
@@ -99,6 +99,8 @@ Get node list of presto cluster and return it.
 
 ## Versions
 
+* 0.0.2: maintenance release
+  * add User-Agent header with version
 * 0.0.1: initial release
 
 ## Todo
