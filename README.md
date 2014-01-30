@@ -134,6 +134,8 @@ Get node list of presto cluster and return it.
 
 ## Versions
 
+* 0.0.4:
+  * send cancel request of canceled query actually
 * 0.0.3:
   * simple and immediate query execution support
 * 0.0.2: maintenance release
