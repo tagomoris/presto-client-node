@@ -20,6 +20,7 @@ client.execute({
   query:   'SELECT count(*) as cnt FROM tblname WHERE ...',
   catalog: 'hive',
   schema:  'default',
+  state:   function(error, query_id, stats){ console.log({message:"status changed", id:query_id, stats:stats}); },
   columns: function(error, data){ console.log({resultColumns: data}); },
   data:    function(error, data, columns, stats){ console.log(data); },
   success: function(error, stats){},
@@ -97,6 +98,13 @@ Attributes of opts [object] are:
   * fetch query info (execution statistics) for success callback, or not (default false)
 * cancel [function() :optional]
   * client stops fetch of query results if this callback returns `true`
+* state [function(error, query_id, stats) :optional]
+  * called when query stats changed
+    * `stats.state`: QUEUED, PLANNING, STARTING, RUNNING, FINISHED, or CANCELED, FAILED
+  * query_id
+    * id string like `20140214_083451_00012_9w6p5`
+  * stats
+    * object which contains running query status
 * columns [function(error, data) :optional]
   * called once when columns and its types are found in results
   * data
@@ -120,6 +128,20 @@ Attributes of opts [object] are:
   * one of `callback` or `success` must be specified
 
 Callbacks order (success query) is: columns -> data (-> data xN) -> success (or callback)
+
+### query(query_id, callback)
+
+Get query current status. (Same with 'Raw' of Presto Web in browser.)
+
+* query_id [string]
+* callback [function(error, data)]
+
+### kill(query_id, callback)
+
+Stop query immediately.
+
+* query_id [string]
+* callback [function(error) :optional]
 
 ### nodes(opts, callback)
 
