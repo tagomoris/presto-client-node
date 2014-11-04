@@ -55,6 +55,8 @@ Instanciate client object and set default configurations.
     * default schema name
   * checkInterval [integer]
     * interval milliseconds of each RPC to check query status (default: 800ms)
+  * jsonParser [object]
+    * custom json parser if required (default: `JSON`)
 
 return value: client instance object
 
@@ -154,8 +156,37 @@ Get node list of presto cluster and return it.
   * data
     * array of node objects
 
+## BIGINT value handling
+
+Javascript standard `JSON` module cannot handle BIGINT values correctly by precision problems.
+
+```js
+JSON.parse('{"bigint":1139779449103133602}').bigint //=> 1139779449103133600
+```
+
+If your query puts numeric values in its results and precision is important for that query, you can swap JSON parser with any modules which has `parse` method.
+
+```js
+var JSONbig = require('json-bigint');
+JSONbig.parse('{"bigint":1139779449103133602}').bigint.toString() //=> "1139779449103133602"
+// set client option
+var client = new presto.Client({
+  // ...
+  jsonParser: JSONbig,
+  // ...
+});
+```
+
 ## Versions
 
+* 0.1.0:
+  * add option to pass customized json parser to handle BIGINT values
+  * add check for required callbacks of query execution
+* 0.0.6:
+  * add API to get/delete queries
+  * add callback `state` on query execution
+* 0.0.5:
+  * fix to do error check on query execution
 * 0.0.4:
   * send cancel request of canceled query actually
 * 0.0.3:
