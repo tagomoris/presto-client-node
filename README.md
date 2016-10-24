@@ -181,6 +181,8 @@ var client = new presto.Client({
 
 ## Versions
 
+* 0.1.1:
+  * fix bug not to handle HTTP level errors correctly
 * 0.1.0:
   * add option to pass customized json parser to handle BIGINT values
   * add check for required callbacks of query execution
