@@ -78,7 +78,7 @@ Execute query on Presto cluster, and fetch results.
    * schema [string]
      * schema string (default: intance default schema)
    * session [string]
-     * set session variables via the X-Presto-Session header - string should have form `key1=val1,key2=val2`
+     * set session variables via the [X-Presto-Session header](https://stackoverflow.com/questions/37082016/how-to-manage-presto-query-session-variables-using-rest-api) - string should have form `key1=val1,key2=val2` 
 * callback [function(error, data, columns)]
  * called once when query finished
  * data
