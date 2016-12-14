@@ -181,6 +181,8 @@ var client = new presto.Client({
 
 ## Versions
 
+* 0.1.2:
+  * add X-Presto-Session if "session" specified
 * 0.1.1:
   * fix bug not to handle HTTP level errors correctly
 * 0.1.0:
