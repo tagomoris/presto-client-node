@@ -5,7 +5,7 @@ Distributed query engine "Presto" 's client library for node.js.
 ```js
 var presto = require('presto-client');
 var client = new presto.Client({user: 'myname', catalog: 'hive', schema: 'default'});
- 
+
 client.execute('show schemas', function(error, data, columns){
   console.log({databases: data});
 });
@@ -15,7 +15,7 @@ For queries with long process time and heavy output:
 ```js
 var presto = require('presto-client');
 var client = new presto.Client({user: 'myname'});
- 
+
 client.execute({
   query:   'SELECT count(*) as cnt FROM tblname WHERE ...',
   catalog: 'hive',
@@ -77,6 +77,8 @@ Execute query on Presto cluster, and fetch results.
      * catalog string (default: instance default catalog)
    * schema [string]
      * schema string (default: intance default schema)
+   * session [string]
+     * set session variables via the [X-Presto-Session header](https://stackoverflow.com/questions/37082016/how-to-manage-presto-query-session-variables-using-rest-api) - string should have form `key1=val1,key2=val2` 
 * callback [function(error, data, columns)]
  * called once when query finished
  * data
