@@ -79,6 +79,8 @@ Execute query on Presto cluster, and fetch results.
      * schema string (default: intance default schema)
    * session [string]
      * set session variables via the [X-Presto-Session header](https://stackoverflow.com/questions/37082016/how-to-manage-presto-query-session-variables-using-rest-api) - string should have form `key1=val1,key2=val2` 
+   * timezone [string :optional]
+     * set time zone via [X-Presto-Time-Zone header](https://prestodb.io/docs/current/release/release-0.66.html)
 * callback [function(error, data, columns)]
  * called once when query finished
  * data
@@ -98,6 +100,7 @@ Attributes of opts [object] are:
 * query [string]
 * catalog [string]
 * schema [string]
+* timezone [string :optional]
 * info [boolean :optional]
   * fetch query info (execution statistics) for success callback, or not (default false)
 * cancel [function() :optional]
