@@ -3,7 +3,7 @@ var mock_data = require('./mocks/mock-data');
 var server = require('./mocks/mock-coordinator');
 
 var presto = require('../index');
-var client = new presto.Client({user: 'myname', catalog: 'hive', schema: 'default'});
+var client = new presto.Client({user: 'myname', port: 3000, catalog: 'hive', schema: 'default'});
 
 describe('Requests', function() {
     describe('GET Nodes', function() {
