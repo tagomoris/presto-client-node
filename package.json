@@ -17,5 +17,9 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/tagomoris/presto-client-node/issues"
+  },
+  "devDependencies": {
+    "express": "^4.14.0",
+    "mocha": "^3.2.0"
   }
 }
