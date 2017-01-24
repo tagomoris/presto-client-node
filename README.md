@@ -182,6 +182,10 @@ var client = new presto.Client({
 });
 ```
 
+## Testing
+
+To test code changes, use `npm test`. This will launch a mock Presto server on port 3000, and run Mocha.js tests.
+
 ## Versions
 
 * 0.1.3:
