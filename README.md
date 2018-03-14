@@ -45,6 +45,17 @@ Instanciate client object and set default configurations.
 * opts [object]
   * host [string]
     * presto coordinator hostname or address (default: localhost)
+  * ssl [object]
+    * setting a Hash object enables SSL and verify server certificate with options (default: `null`):
+      * `ca`: An authority certificate or array of authority certificates to check the remote host against
+      * `cert`: Public x509 certificate to use (default : `null`)
+      * `ciphers` : Default cipher suite to use. (default: https://nodejs.org/api/tls.html#tls_modifying_the_default_tls_cipher_suite)
+      * `key`: Private key to use for SSL (default: `null`)
+      * `passphrase`:  A string of passphrase for the private key or pfx (default: `null`)
+      * `pfx`: Certificate, Private key and CA certificates to use for SSL. (default: `null`).
+      * `rejectUnauthorized`: If not `false` the server will reject any connection which is not authorized with the list of supplied CAs. This option only has an effect if requestCert is `true` (default: `true`)
+      * `secureProtocol`: Optional SSL method to use. The possible values are listed as SSL_METHODS, use the function names as strings. For example, "SSLv3_method" to force SSL version 3 (default: `SSLv23_method`)
+      * `servername`: Server name for the SNI (Server Name Indication) TLS extension
   * port [integer]
     * presto coordinator port (default: 8080)
   * user [string]
