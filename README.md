@@ -195,6 +195,8 @@ var client = new presto.Client({
 
 ## Versions
 
+* 0.2.0:
+  * add HTTPS support
 * 0.1.3:
   * add X-Presto-Time-Zone if "timezone" specified
 * 0.1.2:
