@@ -60,6 +60,9 @@ Instanciate client object and set default configurations.
     * presto coordinator port (default: 8080)
   * user [string]
     * username of query (default: process user name)
+  * basic_auth [object]
+    * Pass in a user and password to enable Authorization Basic headers on all requests.
+    * basic_auth: {user: "user", password: "password"} (default:null)
   * catalog [string]
     * default catalog name
   * schema [string]
