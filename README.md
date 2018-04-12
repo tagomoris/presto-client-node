@@ -198,6 +198,8 @@ var client = new presto.Client({
 
 ## Versions
 
+* 0.3.0:
+  * add Basic Authentication support
 * 0.2.0:
   * add HTTPS support
 * 0.1.3:
