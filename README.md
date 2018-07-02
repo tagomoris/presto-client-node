@@ -69,6 +69,12 @@ Instanciate client object and set default configurations.
     * default schema name
   * checkInterval [integer]
     * interval milliseconds of each RPC to check query status (default: 800ms)
+  * enable_verbose_state_callback [boolean]
+    * when set to `true`, this flag modifies the condition of the state change callback to return data every `checkInterval` (default: 800ms). 
+    * when set to `true`, if you wish to modify the frequency of updates you must change the `checkInterval` value accordingly.
+    * when enable_verbose_state_callback is set to `false`, the state change callback will only be called upon a change in state. 
+    * The purpose of this variable is to enable verbose update capability in state callbacks. This is such that "percentage complete" and "processed rows" may be extracted despite the state still remaining in a particular state eg. "RUNNING". 
+    * (default: false)
   * jsonParser [object]
     * custom json parser if required (default: `JSON`)
 
