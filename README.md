@@ -163,8 +163,10 @@ var client = new presto.Client({
 
 ## Versions
 
-* 0.4.0:
+* 0.5.0:
   * remove support for execute(arg, callback) using `/v1/execute`
+* 0.4.0:
+  * add a parameter to call status callback in verbose
 * 0.3.0:
   * add Basic Authentication support
 * 0.2.0:
