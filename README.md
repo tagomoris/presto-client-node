@@ -4,16 +4,6 @@ Distributed query engine "Presto" 's client library for node.js.
 
 ```js
 var presto = require('presto-client');
-var client = new presto.Client({user: 'myname', catalog: 'hive', schema: 'default'});
-
-client.execute('show schemas', function(error, data, columns){
-  console.log({databases: data});
-});
-```
-
-For queries with long process time and heavy output:
-```js
-var presto = require('presto-client');
 var client = new presto.Client({user: 'myname'});
 
 client.execute({
@@ -79,39 +69,9 @@ Instanciate client object and set default configurations.
 
 return value: client instance object
 
-### execute(arg, callback)
-
-If 2nd argument `callback` specified, this api will be selected.
-
-This is an API to execute queries that returns result immediately, like `show schemas`, `show tables` and others. (Using "/v1/execute" HTTP RPC.)
-
-Execute query on Presto cluster, and fetch results.
-
-* arg [Object or string]
- * arg [String]: query string executed
-   * `catalog` and `schema` must be specified in `new Client()` for this argument type
- * arg [Object]
-   * query [string]
-   * catalog [string]
-     * catalog string (default: instance default catalog)
-   * schema [string]
-     * schema string (default: intance default schema)
-   * session [string]
-     * set session variables via the [X-Presto-Session header](https://stackoverflow.com/questions/37082016/how-to-manage-presto-query-session-variables-using-rest-api) - string should have form `key1=val1,key2=val2` 
-   * timezone [string :optional]
-     * set time zone via [X-Presto-Time-Zone header](https://prestodb.io/docs/current/release/release-0.66.html)
-* callback [function(error, data, columns)]
- * called once when query finished
- * data
-   * array of arrays of each field values
-   * `[ [ 'field1Value', 'field2Value', 3 ], [ 'field1Value', 'field2Value', 6 ], ... ]`
- * columns
-   * array of field names and types
-   * `[ { name: 'timestamp', type: 'varchar' }, { name: 'username', type: 'varchar' }, { name: 'cnt', type: 'bigint' } ] `
-
 ### execute(opts)
 
-This is an API to execute queries that really read large amount of data. (Using "/v1/statement" HTTP RPC.)
+This is an API to execute queries. (Using "/v1/statement" HTTP RPC.)
 
 Execute query on Presto cluster, and fetch results.
 
@@ -203,6 +163,8 @@ var client = new presto.Client({
 
 ## Versions
 
+* 0.4.0:
+  * remove support for execute(arg, callback) using `/v1/execute`
 * 0.3.0:
   * add Basic Authentication support
 * 0.2.0:
