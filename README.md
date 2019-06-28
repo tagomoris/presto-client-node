@@ -10,7 +10,7 @@ client.execute({
   query:   'SELECT count(*) as cnt FROM tblname WHERE ...',
   catalog: 'hive',
   schema:  'default',
-  source:  'nodejs-client'
+  source:  'nodejs-client',
   state:   function(error, query_id, stats){ console.log({message:"status changed", id:query_id, stats:stats}); },
   columns: function(error, data){ console.log({resultColumns: data}); },
   data:    function(error, data, columns, stats){ console.log(data); },
