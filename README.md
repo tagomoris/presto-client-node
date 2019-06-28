@@ -166,6 +166,8 @@ var client = new presto.Client({
 
 ## Versions
 
+* 0.6.0:
+  * add X-Presto-Source if "source" specified
 * 0.5.0:
   * remove support for execute(arg, callback) using `/v1/execute`
 * 0.4.0:
