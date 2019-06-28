@@ -10,6 +10,7 @@ client.execute({
   query:   'SELECT count(*) as cnt FROM tblname WHERE ...',
   catalog: 'hive',
   schema:  'default',
+  source:  'nodejs-client'
   state:   function(error, query_id, stats){ console.log({message:"status changed", id:query_id, stats:stats}); },
   columns: function(error, data){ console.log({resultColumns: data}); },
   data:    function(error, data, columns, stats){ console.log(data); },
@@ -50,6 +51,8 @@ Instanciate client object and set default configurations.
     * Presto coordinator port (default: 8080)
   * user [string]
     * Username of query (default: process user name)
+  * source [string]
+    * Source of query (default: nodejs-client)
   * basic_auth [object]
     * Pass in a user and password to enable Authorization Basic headers on all requests.
     * basic_auth: {user: "user", password: "password"} (default:null)
