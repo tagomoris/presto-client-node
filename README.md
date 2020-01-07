@@ -166,6 +166,8 @@ var client = new presto.Client({
 
 ## Versions
 
+* 0.7.0:
+  * support the change of prestodb 0.226 (compatible with others)
 * 0.6.0:
   * add X-Presto-Source if "source" specified
 * 0.5.0:
