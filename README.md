@@ -166,6 +166,8 @@ var client = new presto.Client({
 
 ## Versions
 
+* 0.8.0:
+  * fix the bug about SSL/TLS handling if redirections are required
 * 0.7.0:
   * support the change of prestodb 0.226 (compatible with others)
 * 0.6.0:
