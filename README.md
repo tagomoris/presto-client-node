@@ -166,6 +166,8 @@ var client = new presto.Client({
 
 ## Versions
 
+* 0.8.1:
+  * fix to specify default ports of http/https if nextUri doesn't have ports
 * 0.8.0:
   * fix the bug about SSL/TLS handling if redirections are required
 * 0.7.0:
