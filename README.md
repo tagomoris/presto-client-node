@@ -166,6 +166,8 @@ var client = new presto.Client({
 
 ## Versions
 
+* 0.9.0:
+  * make "catalog" and "schema" options optional (need to specify those in queries if omitted)
 * 0.8.1:
   * fix to specify default ports of http/https if nextUri doesn't have ports
 * 0.8.0:
