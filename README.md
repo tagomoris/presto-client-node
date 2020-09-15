@@ -25,7 +25,7 @@ client.execute({
 npm install -g presto-client
 ```
 
-Or add `presto-client` to your own `packagen.json`, and do `npm install`.
+Or add `presto-client` to your own `package.json`, and do `npm install`.
 
 ## API
 
