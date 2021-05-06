@@ -69,7 +69,7 @@ Instanciate client object and set default configurations.
     * The purpose of this variable is to enable verbose update capability in state callbacks. This is such that "percentage complete" and "processed rows" may be extracted despite the state still remaining in a particular state eg. "RUNNING".
   * jsonParser [object]
     * Custom json parser if required (default: `JSON`)
-  * mode [string]
+  * engine [string]
     * Change headers set. Added for compatibility with Trino.
     * Available options: presto, trino (default: presto)
 
