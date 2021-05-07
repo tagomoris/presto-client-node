@@ -170,6 +170,8 @@ var client = new presto.Client({
 
 ## Versions
 
+* 0.10.0:
+  * add "engine" option to execute queries on Trino
 * 0.9.0:
   * make "catalog" and "schema" options optional (need to specify those in queries if omitted)
 * 0.8.1:
