@@ -21,7 +21,7 @@ client.execute({
 
 ## Installation
 
-```
+```shell
 npm install -g presto-client
 ```
 
@@ -65,10 +65,13 @@ Instanciate client object and set default configurations.
   * enableVerboseStateCallback [boolean]
     * Enable more verbose callback for Presto query states (default: false)
     * When set to `true`, this flag modifies the condition of the state change callback to return data every `checkInterval`(default: 800ms). Modify `checkInterval` if you wish to change the frequency.
-    * Otherwise (`false`), the state change callback will only be called upon a change in state. 
-    * The purpose of this variable is to enable verbose update capability in state callbacks. This is such that "percentage complete" and "processed rows" may be extracted despite the state still remaining in a particular state eg. "RUNNING". 
+    * Otherwise (`false`), the state change callback will only be called upon a change in state.
+    * The purpose of this variable is to enable verbose update capability in state callbacks. This is such that "percentage complete" and "processed rows" may be extracted despite the state still remaining in a particular state eg. "RUNNING".
   * jsonParser [object]
     * Custom json parser if required (default: `JSON`)
+  * engine [string]
+    * Change headers set. Added for compatibility with Trino.
+    * Available options: presto, trino (default: presto)
 
 return value: client instance object
 
@@ -79,6 +82,7 @@ This is an API to execute queries. (Using "/v1/statement" HTTP RPC.)
 Execute query on Presto cluster, and fetch results.
 
 Attributes of opts [object] are:
+
 * query [string]
 * catalog [string]
 * schema [string]
