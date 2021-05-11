@@ -56,6 +56,8 @@ Instanciate client object and set default configurations.
   * basic_auth [object]
     * Pass in a user and password to enable Authorization Basic headers on all requests.
     * basic_auth: {user: "user", password: "password"} (default:null)
+  * custom_auth [string]
+    * If given, override HTTP `Authorization` header with the provided string.
   * catalog [string]
     * Default catalog name
   * schema [string]
