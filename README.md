@@ -173,6 +173,8 @@ var client = new presto.Client({
 
 ## Versions
 
+* 0.11.0:
+  * add "custom_auth" option to specify `Authorization` header value directly ([for Kerberos, OpenID Connect, etc](https://github.com/tagomoris/presto-client-node/issues/47))
 * 0.10.0:
   * add "engine" option to execute queries on Trino
 * 0.9.0:
