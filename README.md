@@ -173,6 +173,8 @@ var client = new presto.Client({
 
 ## Versions
 
+* 0.11.2:
+  * fix pregression for basic_auth feature
 * 0.11.1:
   * fix a critical bug around the code for authorization
 * 0.11.0:

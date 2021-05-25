@@ -1,6 +1,6 @@
 {
   "name": "presto-client",
-  "version": "0.11.1",
+  "version": "0.11.2",
   "description": "Distributed query engine Presto/Trino client library for node.js",
   "main": "index.js",
   "scripts": {
