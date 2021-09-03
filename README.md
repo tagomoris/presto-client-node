@@ -90,6 +90,9 @@ Attributes of opts [object] are:
 * catalog [string]
 * schema [string]
 * timezone [string :optional]
+* prepares [array(string)]
+  * The array of prepared queries
+  * Prepared queries can be referred as `queryN`(N: index) like `query0`, `query1` in the query specified as `query`
 * info [boolean :optional]
   * fetch query info (execution statistics) for success callback, or not (default false)
 * cancel [function() :optional]
