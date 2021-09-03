@@ -176,6 +176,9 @@ var client = new presto.Client({
 
 ## Versions
 
+* 0.12.0:
+  * add X-Trino-Prepared-Statement to support SQL placeholder
+  * catch Invalid URL errors
 * 0.11.2:
   * fix pregression for basic_auth feature
 * 0.11.1:
