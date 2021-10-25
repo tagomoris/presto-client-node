@@ -91,7 +91,7 @@ Attributes of opts [object] are:
 * schema [string]
 * timezone [string :optional]
 * user [string :optional]
-* prepares [array(string)]
+* prepares [array(string) :optional]
   * The array of prepared statements, without `PREPARE query0 FROM` prefix.
   * Prepared queries can be referred as `queryN`(N: index) like `query0`, `query1` in the query specified as `query`. Example:
     ```javascript
