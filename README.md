@@ -180,6 +180,8 @@ var client = new presto.Client({
 
 ## Versions
 
+* 0.12.2:
+  * fix the bug of the "prepares" option
 * 0.12.1:
   * add "user" option on execute() to override the user specified per client
 * 0.12.0:
