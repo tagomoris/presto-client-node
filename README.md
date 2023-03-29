@@ -99,6 +99,8 @@ Attributes of opts [object] are:
     ```
 * info [boolean :optional]
   * fetch query info (execution statistics) for success callback, or not (default false)
+* headers [object :optional]
+  * additional headers to be included in the request, check the full list for [Trino](https://trino.io/docs/current/develop/client-protocol.html#client-request-headers) and [Presto](https://prestodb.io/docs/current/develop/client-protocol.html#client-request-headers) engines
 * cancel [function() :optional]
   * client stops fetch of query results if this callback returns `true`
 * state [function(error, query_id, stats) :optional]
