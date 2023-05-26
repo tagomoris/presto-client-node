@@ -1,5 +1,7 @@
-var { beforeAll, describe, expect, test } = require('@jest/globals');
-var { GenericContainer, Wait } = require('testcontainers');
+// Before running the tests, make sure to start the docker containers
+
+var { describe, expect, test } = require('@jest/globals');
+var os = require('os');
 var Client = require('./index').Client;
 
 test('cannot use basic and custom auth', function(){
@@ -16,33 +18,13 @@ test('cannot use basic and custom auth', function(){
   }).toThrow(new Error('Please do not specify basic_auth and custom_auth at the same time.'));
 });
 
-describe.each([
-  ['presto', 'ahanaio/prestodb-sandbox:0.281'],
-  ['trino', 'trinodb/trino:418'],
-])('%s', function(engine, image){
-  var container;
-  var client;
-  beforeAll(function(done){
-    new GenericContainer(image)
-      .withExposedPorts(8080)
-      .withWaitStrategy(Wait.forLogMessage('SERVER STARTED'))
-      .start().then(function(c){
-        container = c;
-        client = new Client({
-          host: container.getHost(),
-          port: container.getMappedPort(8080),
-          catalog: 'tpch',
-          schema: 'tiny',
-          engine,
-        });
-        done();
-      });
-  }, 60000);
-
-  afterAll(function(){
-    if (container) {
-      container.stop()
-    }
+describe.each([['presto'], ['trino']])('%s', function(engine){
+  const client = new Client({
+    host: 'localhost',
+    port: engine === 'presto' ? 18080 : 18081,
+    catalog: 'tpch',
+    schema: 'tiny',
+    engine,
   });
 
   test('simple query', function(done){

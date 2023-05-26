@@ -19,7 +19,6 @@
     "url": "https://github.com/tagomoris/presto-client-node/issues"
   },
   "devDependencies": {
-    "jest": "29.5.0",
-    "testcontainers": "9.8.0"
+    "jest": "29.5.0"
   }
 }

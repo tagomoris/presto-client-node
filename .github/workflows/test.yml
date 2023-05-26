@@ -8,6 +8,16 @@ on:
 
 jobs:
   test:
+    services:
+      presto:
+        image: ahanaio/prestodb-sandbox:0.281
+        ports:
+          - "18080:8080"
+      trino:
+        image: trinodb/trino:418
+        ports:
+          - "18081:8080"
+
     runs-on: ubuntu-latest
     strategy:
       matrix:
