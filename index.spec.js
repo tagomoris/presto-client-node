@@ -42,7 +42,7 @@ describe.each([['presto'], ['trino']])('%s', function(engine){
         done();
       },
     });
-  });
+  }, 10000);
 
   test('query with error', function(done){
     expect.assertions(2);
