@@ -180,6 +180,22 @@ var client = new presto.Client({
 });
 ```
 
+## Development
+
+When working on this library, you can use the included docker-compose.yml file to spin up a Presto and Trino DBs, which can be done with:
+
+```
+docker compose up
+```
+
+Can connect to Presto at `http://localhost:18080` and Trino at `http://localhost:18081`, without username/password.
+
+After making a change, you can run the available test suite by doing:
+
+```
+npm run test
+```
+
 ## Versions
 
 * 0.13.0:
