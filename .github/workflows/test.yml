@@ -1,0 +1,31 @@
+name: Test
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  test:
+    services:
+      presto:
+        image: ahanaio/prestodb-sandbox:0.281
+        ports:
+          - "18080:8080"
+      trino:
+        image: trinodb/trino:418
+        ports:
+          - "18081:8080"
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 16.x, 18.x ]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm install
+      - run: npm test

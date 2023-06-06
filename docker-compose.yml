@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  presto:
+    image: ahanaio/prestodb-sandbox:0.281
+    # there is no arm64 version of this image
+    platform: linux/amd64
+    ports:
+      - "18080:8080"
+
+  trino:
+    image: trinodb/trino:418
+    ports:
+      - "18081:8080"
+
