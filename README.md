@@ -75,6 +75,8 @@ Instanciate client object and set default configurations.
   * engine [string]
     * Change headers set. Added for compatibility with Trino.
     * Available options: presto, trino (default: presto)
+  * timeout [integer :optional]
+    * The seconds that a query is allowed to run before it starts returning results, defaults to 60 seconds. Set to `null` or `0` to disable.
 
 return value: client instance object
 
@@ -101,6 +103,7 @@ Attributes of opts [object] are:
   * fetch query info (execution statistics) for success callback, or not (default false)
 * headers [object :optional]
   * additional headers to be included in the request, check the full list for [Trino](https://trino.io/docs/current/develop/client-protocol.html#client-request-headers) and [Presto](https://prestodb.io/docs/current/develop/client-protocol.html#client-request-headers) engines
+* timeout [integer :optional]
 * cancel [function() :optional]
   * client stops fetch of query results if this callback returns `true`
 * state [function(error, query_id, stats) :optional]
@@ -124,6 +127,8 @@ Attributes of opts [object] are:
     * same as data of `columns` callback
   * stats (optional)
     * runtime statistics object of query
+* retry [function() :optional]
+  * called if a request was retried due to server returning `502`, `503`, or `504`
 * success [function(error, stats, info) :optional]
   * called once when all results are fetched (default: value of `callback`)
 * error [function(error) :optional]
