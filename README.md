@@ -131,6 +131,7 @@ Attributes of opts [object] are:
 * callback [function(error, stats) :optional]
   * callback for query completion (both of success and fail)
   * one of `callback` or `success` must be specified
+  * one of `callback` or `error` must be specified
 
 Callbacks order (success query) is: columns -> data (-> data xN) -> success (or callback)
 
