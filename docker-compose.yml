@@ -4,7 +4,7 @@ services:
   presto:
     image: ghcr.io/popsql/prestodb-sandbox:0.281
     # there is no arm64 version of this image
-    platform: linux/amd64    
+    platform: linux/amd64
     ports:
       - "18080:8080"
 
