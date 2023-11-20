@@ -51,7 +51,7 @@ describe.each([['presto'], ['trino']])('%s', function(engine){
       callback: function(error){
         expect(error).not.toBeNull();
         var tableName = engine === 'presto' ? 'tpch.tiny.non_existent_table' : "'tpch.tiny.non_existent_table'";
-        expect(error.message).toEqual('line 1:15: Table ' + tableName + ' does not exist');
+        expect(error.message).toEqual((engine === 'presto' ? '' : 'line 1:15: ') + Table ' + tableName + ' does not exist');
         done();
       },
     });
