@@ -20,5 +20,8 @@
   },
   "devDependencies": {
     "jest": "29.5.0"
+  },
+  "dependencies": {
+    "follow-redirects": "^1.15.3"
   }
 }

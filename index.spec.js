@@ -349,3 +349,73 @@ describe('when timeout is set', function(){
     });
   });
 });
+
+describe('redirect tests', function(){
+  var responses = {
+    '/v1/statement': {
+        "stats": {
+            "state": "QUEUED",
+        },
+        "nextUri": "http://localhost:8111/redirect",
+        "infoUri": "http://localhost:8111/v1/query/20140120_032523_00000_32v8g",
+        "id": "20140120_032523_00000_32v8g",
+    },
+    '/v1/statement/20140120_032523_00000_32v8g/1': {
+      "stats": {
+          "state": "FINISHED",
+      },
+      "columns": [ { "type": "integer", "name": "col" } ],
+      "data": [ [ 1 ] ],
+      "infoUri": "http://localhost:8111/v1/query/20140120_032523_00000_32v8g",
+      "id": "20140120_032523_00000_32v8g"
+    }
+  };
+
+  var server;
+
+  beforeAll(function(done) {
+    server = http.createServer(function(req, res){
+      if (responses[req.url]) {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.write(JSON.stringify(responses[req.url]));
+      } else if (req.url === '/redirect') {
+        res.statusCode = 301;
+        res.setHeader('Location', 'http://localhost:8111/v1/statement/20140120_032523_00000_32v8g/1');
+      } else {
+        res.statusCode = 404;
+      }
+      res.end();
+    });
+    server.listen(8111, function(){
+      done();
+    });
+  });
+
+  afterAll(function(done){
+    server.close(function(){
+      done();
+    });
+  });
+
+  test('the client follows redirects', function(done) {
+    expect.assertions(1);
+    var client = new Client({
+      host: 'localhost',
+      port: 8111,
+    });
+    client.execute({
+      query: 'SELECT 1',
+      timeout: 1,
+      data: function(_, data){
+        expect(data).toEqual([[1]]);
+      },
+      error: function(error){
+        done(error);
+      },
+      success: function(){
+        done();
+      },
+    });
+  });
+});
