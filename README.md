@@ -209,6 +209,10 @@ npm run test
 
 ## Versions
 
+* 1.0.0:
+  * add test cases and CI setting, new options and others, thanks to the many contributions from Matthew Peveler (@MasterOdin)
+  * add "timeout" option to retry requests for server errors
+  * change "error" callback (or "callback" as fallback path) to be specified when "success" is used
 * 0.13.0:
   * add "headers" option on execute() to specify any request headers
 * 0.12.2:
