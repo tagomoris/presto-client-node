@@ -11,3 +11,14 @@ services:
     ports:
       - "18081:8080"
 
+  nginx:
+    image: nginx:1.25-alpine
+    depends_on:
+      - presto
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl/nginx-selfsigned.crt:/etc/nginx/ssl/nginx-selfsigned.crt:ro
+      - ./nginx/ssl/nginx-selfsigned.key:/etc/nginx/ssl/nginx-selfsigned.key:ro
