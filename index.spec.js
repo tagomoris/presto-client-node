@@ -50,8 +50,8 @@ describe.each([['presto'], ['trino']])('%s', function(engine){
       query: 'SELECT * FROM non_existent_table',
       callback: function(error){
         expect(error).not.toBeNull();
-        var tableName = engine === 'presto' ? 'tpch.tiny.non_existent_table' : "'tpch.tiny.non_existent_table'";
-        expect(error.message).toEqual((engine === 'presto' ? '' : 'line 1:15: ') + 'Table ' + tableName + ' does not exist');
+        var expectation = (engine === 'presto') ? 'Table tpch.tiny.non_existent_table does not exist' : "line 1:15: Table 'tpch.tiny.non_existent_table' does not exist";
+        expect(error.message).toEqual(expectation);
         done();
       },
     });
