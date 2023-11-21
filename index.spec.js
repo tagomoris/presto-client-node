@@ -18,6 +18,38 @@ test('cannot use basic and custom auth', function(){
   }).toThrow(new Error('Please do not specify basic_auth and custom_auth at the same time.'));
 });
 
+describe('execute errors', function(){
+  const client = new Client();
+
+  test('error if do not define success or callback', function(){
+    expect(function() {
+      client.execute({
+        query: 'SELECT 1',
+        error: () => {},
+      });
+    }).toThrow(new Error("callback function 'success' (or 'callback') not specified"));
+  });
+
+  test('error if do not define error or callback', function(){
+    expect(function() {
+      client.execute({
+        query: 'SELECT 1',
+        success: () => {},
+      })
+    }).toThrow(new Error("callback function 'error' (or 'callback') not specified"));
+  });
+
+  test('error if schema provided and not catalog', function() {
+    expect(function() {
+      client.execute({
+        query: 'SELECT 1',
+        schema: 'test',
+        callback: () => {},
+      });
+    }).toThrow(new Error('Catalog not specified; catalog is required if schema is specified'))
+  })
+});
+
 describe.each([['presto'], ['trino']])('%s', function(engine){
   const client = new Client({
     host: 'localhost',
