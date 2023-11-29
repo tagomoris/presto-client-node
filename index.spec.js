@@ -103,6 +103,43 @@ describe.each([['presto'], ['trino']])('%s', function(engine){
       },
     });
   });
+
+  test('cancel running query', function(done) {
+    expect.assertions(2);
+    var killed = false;
+    client.execute({
+      query: 'SELECT * FROM tpch.sf1.orders',
+      callback: function(error){
+        expect(error?.message).toEqual('Query was canceled');
+        done();
+      },
+      state: function(_, id, status){
+        if (status.state === 'RUNNING' && !killed) {
+          killed = true;
+          client.kill(id, function(error){
+            expect(error).toBeNull();
+          });
+        }
+      },
+    });
+  });
+
+  test('cancel query via callback function', function(done){
+    var state = null;
+    client.execute({
+      query: 'SELECT * FROM tpch.sf1.orders',
+      cancel: function(){
+        return state === 'RUNNING';
+      },
+      callback: function(error){
+        expect(error?.message).toEqual('query fetch canceled by operation');
+        done();
+      },
+      state: function(_, __, status){
+        state = status.state;
+      },
+    });
+  });
 });
 
 describe('when server returns non-200 response', function(){
