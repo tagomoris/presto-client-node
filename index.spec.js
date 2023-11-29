@@ -418,4 +418,36 @@ describe('redirect tests', function(){
       },
     });
   });
+
+  describe('when using reverse proxy that does not forward protocol', function(){
+    // The first request will go to https://localhost:443/v1/statement, but the
+    // nextUri will respond with http://localhost/v1/statement/... where then
+    // the nginx proxy will 301 redirect us to https again.
+    const client = new Client({
+      host: 'localhost',
+      port: 443,
+      catalog: 'tpch',
+      schema: 'tiny',
+      ssl: {
+        rejectUnauthorized: false,
+      }
+    });
+
+    test('that querying works', function(done){
+      expect.assertions(5);
+      client.execute({
+        query: 'SELECT 1 AS col',
+        data: function(error, data, columns){
+          expect(error).toBeNull();
+          expect(data).toEqual([[1]]);
+          expect(columns).toHaveLength(1);
+          expect(columns[0]).toEqual(expect.objectContaining({ name: 'col', type: 'integer' }));
+        },
+        callback: function(error){
+          expect(error).toBeNull();
+          done();
+        },
+      });
+    }, 10000);
+  });
 });

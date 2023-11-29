@@ -8,22 +8,13 @@ on:
 
 jobs:
   test:
-    services:
-      presto:
-        image: ghcr.io/popsql/prestodb-sandbox:0.284
-        ports:
-          - "18080:8080"
-      trino:
-        image: trinodb/trino:418
-        ports:
-          - "18081:8080"
-
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [ 16.x, 18.x, 20.x ]
     steps:
       - uses: actions/checkout@v3
+      - run: docker compose up --detach --wait
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
