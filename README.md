@@ -209,6 +209,11 @@ npm run test
 
 ## Versions
 
+* 1.1.0:
+  * add automatic retries for server errors
+  * follow redirects if servers simply redirect client's request
+  * fix bug of HTTP/HTTPS procotol handling
+  * fix bug about cancelling queries
 * 1.0.0:
   * add test cases and CI setting, new options and others, thanks to the many contributions from Matthew Peveler (@MasterOdin)
   * add "timeout" option to retry requests for server errors
