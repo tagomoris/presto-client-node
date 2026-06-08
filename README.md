@@ -102,7 +102,7 @@ Attributes of opts [object] are:
 * info [boolean :optional]
   * fetch query info (execution statistics) for success callback, or not (default false)
 * headers [object :optional]
-  * additional headers to be included in the request, check the full list for [Trino](https://trino.io/docs/current/develop/client-protocol.html#client-request-headers) and [Presto](https://prestodb.io/docs/current/develop/client-protocol.html#client-request-headers) engines
+  * additional headers to be included in every request of the query (the initial POST as well as the follow-up `nextUri` polls), check the full list for [Trino](https://trino.io/docs/current/develop/client-protocol.html#client-request-headers) and [Presto](https://prestodb.io/docs/current/develop/client-protocol.html#client-request-headers) engines
 * authorization [string: optional]
   * AUTHORIZATION header value, which overrides the client's configuration per request
 * timeout [integer :optional]
@@ -211,6 +211,8 @@ npm run test
 
 ## Versions
 
+* Unreleased:
+  * fix "headers" option so custom headers are sent on every request of a query (the `nextUri` polls, cancel and info requests), not just the initial POST
 * 1.1.0:
   * add automatic retries for server errors
   * follow redirects if servers simply redirect client's request

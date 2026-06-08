@@ -488,3 +488,83 @@ describe('redirect tests', function(){
     }, 10000);
   });
 });
+
+describe('custom headers', function(){
+  var responses = {
+    '/v1/statement': {
+      "stats": {
+        "state": "QUEUED",
+      },
+      "nextUri": "http://localhost:8111/v1/statement/20140120_032523_00000_32v8g/1",
+      "infoUri": "http://localhost:8111/v1/query/20140120_032523_00000_32v8g",
+      "id": "20140120_032523_00000_32v8g",
+    },
+    '/v1/statement/20140120_032523_00000_32v8g/1': {
+      "stats": {
+        "state": "FINISHED",
+      },
+      "columns": [ { "type": "integer", "name": "col" } ],
+      "data": [ [ 1 ] ],
+      "infoUri": "http://localhost:8111/v1/query/20140120_032523_00000_32v8g",
+      "id": "20140120_032523_00000_32v8g"
+    }
+  };
+
+  var server;
+  var received;
+
+  beforeAll(function(done) {
+    server = http.createServer(function(req, res){
+      received.push({ method: req.method, url: req.url, headers: req.headers });
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'application/json');
+      res.write(JSON.stringify(responses[req.url]));
+      res.end();
+    });
+    server.listen(8111, function(){
+      done();
+    });
+  });
+
+  beforeEach(function(){
+    received = [];
+  });
+
+  afterAll(function(done){
+    server.close(function(){
+      done();
+    });
+  });
+
+  test('forwards custom headers on every request, including nextUri polls', function(done){
+    expect.assertions(6);
+    var client = new Client({
+      host: 'localhost',
+      port: 8111,
+    });
+    client.execute({
+      query: 'SELECT 1 AS col',
+      headers: {
+        'X-Custom-Header': 'custom-value',
+        'Proxy-Authorization': 'Basic dGVzdA==',
+      },
+      callback: function(error){
+        expect(error).toBeNull();
+
+        var post = received.find(function(r){ return r.method === 'POST'; });
+        var poll = received.find(function(r){ return r.method === 'GET'; });
+
+        // Custom headers have always been sent on the initial POST.
+        expect(post.headers['x-custom-header']).toBe('custom-value');
+        expect(post.headers['proxy-authorization']).toBe('Basic dGVzdA==');
+
+        // The nextUri poll must carry them too — this is what regressed.
+        expect(poll).toBeDefined();
+        expect(poll.headers['x-custom-header']).toBe('custom-value');
+        expect(poll.headers['proxy-authorization']).toBe('Basic dGVzdA==');
+
+        done();
+      },
+    });
+  });
+});
